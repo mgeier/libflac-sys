@@ -30,3 +30,6 @@ jobs:
       if: startsWith(matrix.os, 'ubuntu')
       run: |
         cargo doc --all-features
+    - name: Check packaging
+      run: |
+        cargo package
