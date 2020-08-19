@@ -1,0 +1,21 @@
+[package]
+name = "libflac-sys"
+version = "0.0.0"
+authors = ["Matthias Geier <Matthias.Geier@gmail.com>"]
+categories = ["multimedia::encoding", "external-ffi-bindings"]
+keywords = ["flac"]
+description = "FFI bindings to the libFLAC C library"
+readme = "README.md"
+license = "BSD-3-Clause"
+repository = "https://github.com/mgeier/libFLAC-sys"
+edition = "2018"
+
+[features]
+default = ["ogg"]
+ogg = []
+
+[build-dependencies]
+cmake = "0.1"
+
+[dependencies]
+libc = "0.2"

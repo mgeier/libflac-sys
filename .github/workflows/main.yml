@@ -1,0 +1,30 @@
+name: Build libFLAC and run tests
+on: [push, pull_request]
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Build library
+      run: |
+        cargo build --all-features
+    - name: Run tests
+      run: |
+        cargo test
+    - name: rustfmt (on Ubuntu)
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        cargo fmt -- --check
+    - name: clippy (on Ubuntu)
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        cargo clippy --all-targets --all-features -- -D warnings
+    - name: Build docs (on Ubuntu)
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        cargo doc --all-features
