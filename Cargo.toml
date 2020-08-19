@@ -10,6 +10,34 @@ license = "BSD-3-Clause"
 repository = "https://github.com/mgeier/libFLAC-sys"
 edition = "2018"
 
+exclude = [
+    ".*",
+    "Makefile*",
+    "*.m4",
+    "*.sln",
+    "*.sgml",
+    "*.sh",
+    "*.vcproj",
+    "*.vcxproj*",
+    "/flac/test/",
+    "/flac/src/utils/loudness/",
+    "/flac/src/test*/",
+    "/flac/src/plugin*/",
+    "/flac/src/libFLAC++/",
+    "/flac/include/FLAC++/",
+    "/flac/examples/",
+    "/flac/doc/[Dd]oxy*",
+    "/flac/doc/html/",
+    "/flac/ci/",
+    "/flac/build/",
+    "/flac/Scripts/",
+    "/ogg/appveyor.yml",
+    "/ogg/doc/",
+    "/ogg/releases.sha2",
+    "/ogg/test/",
+    "/ogg/win32/",
+]
+
 [features]
 default = ["ogg"]
 ogg = []

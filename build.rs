@@ -5,6 +5,8 @@ fn main() {
         .define("BUILD_PROGRAMS", "OFF")
         .define("BUILD_EXAMPLES", "OFF")
         .define("BUILD_DOCS", "OFF")
+        .define("BUILD_DOXYGEN", "OFF")
+        .define("BUILD_TESTING", "OFF")
         .define("INSTALL_MANPAGES", "OFF")
         .define("INSTALL_PKGCONFIG_MODULES", "OFF")
         .define("INSTALL_CMAKE_CONFIG_MODULE", "OFF");
