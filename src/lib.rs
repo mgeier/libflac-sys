@@ -1,11 +1,58 @@
 /*!
-# FFI bindings to the libFLAC C library
+This crate provides raw FFI bindings to the `libFLAC` library for reading and
+writing losslessly compressed [FLAC] audio files.
 
-https://xiph.org/flac/api/
+[FLAC]: https://xiph.org/flac/
 
 Following the `*-sys` package conventions,
 the `libflac-sys` crate does not define higher-level abstractions over
 the native `libFLAC` library functions.
+
+Original C API documentation: <https://xiph.org/flac/api/>
+
+# Usage
+
+Add this to your `Cargo.toml`:
+
+```toml
+[dependencies]
+libflac-sys = "0.1"
+```
+
+# Features
+
+* `ogg` (enabled by default): Support for FLAC data in OGG containers
+
+# Building the `libFLAC` and `libogg` libraries
+
+When building this crate, the `libFLAC` library is automatically built as well,
+using the [cmake] crate.
+
+[cmake]: https://crates.io/crates/cmake
+
+Furthermore, the `libogg` library is built when the `ogg` feature is selected.
+
+# Auto-generating the Rust bindings
+
+The Rust bindings have already been auto-generated with [bindgen]
+(using the `bindgen/run-bindgen.sh` script) and are part of this crate
+(see `src/bindings.rs`).
+
+[bindgen]: https://crates.io/crates/bindgen
+
+# Contributing
+
+If you want to report a problem or suggest an improvement, please go to
+<https://github.com/mgeier/libflac-sys>.
+Contributions are always welcome!
+
+# Licenses
+
+This crate uses the `BSD-3-Clause` license, in reference to
+Xiph.Org's BSD-like license which is used as
+[`libFLAC` license](https://github.com/xiph/flac/blob/master/COPYING.Xiph) and
+[`libogg` license](https://github.com/xiph/ogg/blob/master/COPYING).
+
 */
 #![no_std]
 #![allow(non_camel_case_types)]

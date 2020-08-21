@@ -4,10 +4,9 @@ version = "0.0.0"
 authors = ["Matthias Geier <Matthias.Geier@gmail.com>"]
 categories = ["multimedia::encoding", "external-ffi-bindings"]
 keywords = ["flac"]
-description = "FFI bindings to the libFLAC C library"
-readme = "README.md"
+description = "Raw FFI bindings to the libFLAC library"
 license = "BSD-3-Clause"
-repository = "https://github.com/mgeier/libFLAC-sys"
+repository = "https://github.com/mgeier/libflac-sys"
 edition = "2018"
 
 exclude = [
