@@ -6,30 +6,51 @@ jobs:
   build-and-test:
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        include:
+        - os: macos-latest
+        - os: windows-latest
+          toolchain-suffix: -gnu
+        - os: windows-latest
+          toolchain-suffix: -msvc
+        - os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: true
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable${{ matrix.toolchain-suffix }}
     - name: Build library
       run: |
         cargo build --all-features
     - name: Run tests
       run: |
         cargo test
-    - name: rustfmt (on Ubuntu)
-      if: startsWith(matrix.os, 'ubuntu')
-      run: |
-        cargo fmt -- --check
-    - name: clippy (on Ubuntu)
-      if: startsWith(matrix.os, 'ubuntu')
-      run: |
-        cargo clippy --all-targets --all-features -- -D warnings
-    - name: Build docs (on Ubuntu)
-      if: startsWith(matrix.os, 'ubuntu')
-      run: |
-        cargo doc --all-features
     - name: Check packaging
       run: |
         cargo package
+
+  check-code:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        components: rustfmt, clippy
+    - name: rustfmt
+      run: |
+        cargo fmt -- --check
+    - name: clippy
+      run: |
+        cargo clippy --all-targets --all-features -- -D warnings
+    - name: docs
+      run: |
+        cargo doc --all-features
