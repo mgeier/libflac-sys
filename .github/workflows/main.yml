@@ -23,6 +23,7 @@ jobs:
       with:
         profile: minimal
         toolchain: stable${{ matrix.toolchain-suffix }}
+        override: true
     - name: Build library
       run: |
         cargo build --all-features
@@ -45,6 +46,7 @@ jobs:
         profile: minimal
         toolchain: stable
         components: rustfmt, clippy
+        override: true
     - name: rustfmt
       run: |
         cargo fmt -- --check
