@@ -24,15 +24,15 @@ jobs:
         profile: minimal
         toolchain: stable${{ matrix.toolchain-suffix }}
         override: true
-    - name: Build library
-      run: |
-        cargo build --all-features
     - name: Run tests
       run: |
-        cargo test
+        cargo test --all-features
+    - name: Run tests (without OGG)
+      run: |
+        cargo test --no-default-features
     - name: Check packaging
       run: |
-        cargo package
+        cargo package --verbose
 
   check-code:
     runs-on: ubuntu-latest
@@ -55,4 +55,4 @@ jobs:
         cargo clippy --all-targets --all-features -- -D warnings
     - name: docs
       run: |
-        cargo doc --all-features
+        cargo doc --verbose --all-features
