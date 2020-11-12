@@ -1,3 +1,9 @@
+#[cfg(not(feature = "build-flac"))]
+fn main() {
+    println!("cargo:rustc-link-lib=FLAC");
+}
+
+#[cfg(feature = "build-flac")]
 fn main() {
     let mut flac_config = cmake::Config::new("flac");
     flac_config
@@ -6,7 +12,7 @@ fn main() {
         .define("BUILD_DOXYGEN", "OFF")
         .define("BUILD_TESTING", "OFF");
 
-    if cfg!(feature = "ogg") {
+    if cfg!(feature = "build-ogg") {
         let ogg_path = cmake::Config::new("ogg")
             .define("BUILD_SHARED_LIBS", "OFF")
             .define("INSTALL_DOCS", "OFF")

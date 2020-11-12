@@ -21,16 +21,12 @@ libflac-sys = "0.1"
 
 # Features
 
-* `ogg` (enabled by default): Support for FLAC data in OGG containers
-
-# Building the `libFLAC` and `libogg` libraries
-
-When building this crate, the `libFLAC` library is automatically built as well,
-using the [cmake] crate.
-
-[cmake]: https://crates.io/crates/cmake
-
-Furthermore, the `libogg` library is built when the `ogg` feature is selected.
+* `build-flac` (enabled by default): build `libFLAC` instead of linking
+   to the system library – `cmake` and a C toolchain is required
+* `build-ogg` (enabled by default, implies `build-flac`):
+   build support for FLAC data in OGG containers into `libFLAC`;
+   if `build-flac` is not selected, support for OGG containers
+   depends on the configuration of the system `libFLAC`
 
 # Auto-generating the Rust bindings
 

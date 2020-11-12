@@ -32,6 +32,26 @@ jobs:
           cargo test --workspace --all-features
       - name: Run tests (without OGG)
         run: |
+          cargo test --workspace --no-default-features --features="build-flac"
+
+  tests-external-libflac:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          sudo apt-get install --yes --no-install-recommends libflac-dev
+      - name: Clone Git repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Run tests against external libraries
+        run: |
           cargo test --workspace --no-default-features
 
   check-code:
