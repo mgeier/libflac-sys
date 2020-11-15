@@ -52,7 +52,7 @@ jobs:
           override: true
       - name: Run tests against external libraries
         run: |
-          cargo test --workspace --no-default-features
+          cargo test --workspace --no-default-features -- --nocapture
 
   check-code:
     runs-on: ubuntu-latest
