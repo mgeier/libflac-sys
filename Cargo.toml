@@ -10,6 +10,8 @@ license = "BSD-3-Clause"
 repository = "https://github.com/mgeier/libflac-sys"
 edition = "2018"
 
+links = "FLAC"
+
 exclude = [
     ".*",
     "Makefile*",
