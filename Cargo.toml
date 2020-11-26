@@ -1,6 +1,6 @@
 [package]
 name = "libflac-sys"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Matthias Geier <Matthias.Geier@gmail.com>"]
 categories = ["multimedia::encoding", "external-ffi-bindings"]
 keywords = ["flac"]

@@ -21,7 +21,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-libflac-sys = "0.1"
+libflac-sys = "0.2"
 ```
 
 
