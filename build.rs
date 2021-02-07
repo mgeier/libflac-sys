@@ -20,6 +20,11 @@ fn main() {
             .define("INSTALL_CMAKE_PACKAGE_MODULE", "OFF")
             .build();
         println!("cargo:rustc-link-search=native={}/lib", ogg_path.display());
+        // This path is used on 64 bit Fedora 33:
+        println!(
+            "cargo:rustc-link-search=native={}/lib64",
+            ogg_path.display()
+        );
         println!("cargo:rustc-link-lib=static=ogg");
 
         flac_config.define("CMAKE_PREFIX_PATH", ogg_path);
