@@ -9,4 +9,5 @@
 
 include!("bindings.rs");
 
+#[allow(clippy::upper_case_acronyms)]
 pub type FILE = libc::FILE;
