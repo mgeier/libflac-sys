@@ -80,3 +80,49 @@ jobs:
       - name: packaging
         run: |
           cargo package --verbose
+
+  MSYS2:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - name: Install MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >-
+            make
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-rust
+      - name: Clone Git repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Run tests
+        run: |
+          cargo test --workspace --all-features
+      - name: Run tests (without OGG)
+        run: |
+          cargo test --workspace --no-default-features --features="build-flac"
+
+  MSYS2-external-libflac:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - name: Install MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >-
+            mingw-w64-x86_64-flac
+            mingw-w64-x86_64-rust
+      - name: Clone Git repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Run tests against external libraries
+        run: |
+          cargo test --workspace --no-default-features -- --nocapture
