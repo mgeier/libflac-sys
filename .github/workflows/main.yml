@@ -95,6 +95,7 @@ jobs:
             make
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-rust
+            mingw-w64-clang-x86_64-libssp
       - name: Clone Git repository
         uses: actions/checkout@v2
         with:
