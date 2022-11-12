@@ -8,9 +8,13 @@ fn main() {
     let mut flac_config = cmake::Config::new("flac");
     flac_config
         .define("BUILD_CXXLIBS", "OFF")
+        .define("BUILD_PROGRAMS", "OFF")
         .define("BUILD_EXAMPLES", "OFF")
-        .define("BUILD_DOXYGEN", "OFF")
-        .define("BUILD_TESTING", "OFF");
+        .define("BUILD_TESTING", "OFF")
+        .define("BUILD_DOCS", "OFF")
+        .define("INSTALL_MANPAGES", "OFF")
+        .define("INSTALL_PKGCONFIG_MODULES", "OFF")
+        .define("INSTALL_CMAKE_CONFIG_MODULE", "OFF");
 
     if cfg!(feature = "build-ogg") {
         let ogg_path = cmake::Config::new("ogg")
