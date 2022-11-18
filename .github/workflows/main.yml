@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Clone Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Install Rust
@@ -41,7 +41,7 @@ jobs:
         run: |
           sudo apt-get install --yes --no-install-recommends libflac-dev
       - name: Clone Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Install Rust
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Install Rust
@@ -96,7 +96,7 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-rust
       - name: Clone Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Run tests
@@ -120,7 +120,7 @@ jobs:
             mingw-w64-x86_64-flac
             mingw-w64-x86_64-rust
       - name: Clone Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Run tests against external libraries
