@@ -22,11 +22,9 @@ jobs:
         with:
           submodules: true
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: stable${{ matrix.toolchain-suffix }}
-          override: true
       - name: Run tests
         run: |
           cargo test --workspace --all-features
@@ -45,11 +43,9 @@ jobs:
         with:
           submodules: true
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: stable
-          override: true
       - name: Run tests against external libraries
         run: |
           cargo test --workspace --no-default-features -- --nocapture
@@ -62,12 +58,10 @@ jobs:
         with:
           submodules: true
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: stable
           components: rustfmt, clippy
-          override: true
       - name: rustfmt
         run: |
           cargo fmt --all --check
