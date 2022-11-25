@@ -12,6 +12,7 @@ fn main() {
         .define("BUILD_EXAMPLES", "OFF")
         .define("BUILD_TESTING", "OFF")
         .define("BUILD_DOCS", "OFF")
+        .define("WITH_STACK_PROTECTOR", "OFF")
         .define("INSTALL_MANPAGES", "OFF")
         .define("INSTALL_PKGCONFIG_MODULES", "OFF")
         .define("INSTALL_CMAKE_CONFIG_MODULE", "OFF");
