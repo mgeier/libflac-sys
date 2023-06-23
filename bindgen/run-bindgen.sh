@@ -10,10 +10,9 @@ bindgen wrapper.h -o ../src/bindings.rs \
 	--no-prepend-enum-name \
 	--use-core \
 	--ctypes-prefix libc \
-	--size_t-is-usize \
-	--whitelist-function "FLAC_.*" \
-	--whitelist-type "FLAC_.*" \
-	--whitelist-var "FLAC_.*" \
-	--blacklist-type FILE \
-	--blacklist-type "_IO_.*" \
+	--allowlist-function "FLAC_.*" \
+	--allowlist-type "FLAC_.*" \
+	--allowlist-var "FLAC_.*" \
+	--blocklist-type FILE \
+	--blocklist-type "_IO_.*" \
 	--
