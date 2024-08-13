@@ -93,11 +93,13 @@ jobs:
       - name: Install MSYS2
         uses: msys2/setup-msys2@v2
         with:
+          msystem: ucrt64
           update: true
           install: >-
             make
-            mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-rust
+          pacboy: >-
+            cmake:p
+            rust:p
       - name: Clone Git repository
         uses: actions/checkout@v3
         with:
@@ -118,10 +120,11 @@ jobs:
       - name: Install MSYS2
         uses: msys2/setup-msys2@v2
         with:
+          msystem: ucrt64
           update: true
-          install: >-
-            mingw-w64-x86_64-flac
-            mingw-w64-x86_64-rust
+          pacboy: >-
+            flac:p
+            rust:p
       - name: Clone Git repository
         uses: actions/checkout@v3
         with:
