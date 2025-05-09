@@ -56,7 +56,7 @@ build-ogg = ["build-flac"]
 
 [build-dependencies]
 # 0.1.45 adds cmake::Config::get_profile()
-cmake = {version = "0.1.45", optional = true}
+cmake = {version = "0.1.54", optional = true}
 
 [dependencies]
 libc = "0.2"
