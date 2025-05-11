@@ -15,4 +15,4 @@ bindgen wrapper.h -o ../src/bindings.rs \
 	--allowlist-var "FLAC_.*" \
 	--blocklist-type FILE \
 	--blocklist-type "_IO_.*" \
-	--
+	--no-layout-tests

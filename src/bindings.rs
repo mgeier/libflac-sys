@@ -170,8 +170,6 @@ pub const FLAC__STREAM_ENCODER_SET_NUM_THREADS_TOO_MANY_THREADS: u32 = 3;
 unsafe extern "C" {
     pub static mut FLAC_API_SUPPORTS_OGG_FLAC: libc::c_int;
 }
-pub type __off_t = libc::c_long;
-pub type __off64_t = libc::c_long;
 pub type FLAC__int8 = i8;
 pub type FLAC__uint8 = u8;
 pub type FLAC__int16 = i16;
@@ -182,7 +180,6 @@ pub type FLAC__uint32 = u32;
 pub type FLAC__uint64 = u64;
 pub type FLAC__bool = libc::c_int;
 pub type FLAC__byte = FLAC__uint8;
-pub type off_t = __off_t;
 pub type FLAC__IOHandle = *mut libc::c_void;
 pub type FLAC__IOCallback_Read = ::core::option::Option<
     unsafe extern "C" fn(
@@ -223,23 +220,6 @@ pub struct FLAC__IOCallbacks {
     pub eof: FLAC__IOCallback_Eof,
     pub close: FLAC__IOCallback_Close,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__IOCallbacks"][::core::mem::size_of::<FLAC__IOCallbacks>() - 48usize];
-    ["Alignment of FLAC__IOCallbacks"][::core::mem::align_of::<FLAC__IOCallbacks>() - 8usize];
-    ["Offset of field: FLAC__IOCallbacks::read"]
-        [::core::mem::offset_of!(FLAC__IOCallbacks, read) - 0usize];
-    ["Offset of field: FLAC__IOCallbacks::write"]
-        [::core::mem::offset_of!(FLAC__IOCallbacks, write) - 8usize];
-    ["Offset of field: FLAC__IOCallbacks::seek"]
-        [::core::mem::offset_of!(FLAC__IOCallbacks, seek) - 16usize];
-    ["Offset of field: FLAC__IOCallbacks::tell"]
-        [::core::mem::offset_of!(FLAC__IOCallbacks, tell) - 24usize];
-    ["Offset of field: FLAC__IOCallbacks::eof"]
-        [::core::mem::offset_of!(FLAC__IOCallbacks, eof) - 32usize];
-    ["Offset of field: FLAC__IOCallbacks::close"]
-        [::core::mem::offset_of!(FLAC__IOCallbacks, close) - 40usize];
-};
 unsafe extern "C" {
     pub static mut FLAC__VERSION_STRING: *const libc::c_char;
 }
@@ -257,7 +237,7 @@ unsafe extern "C" {
 }
 pub const FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE: FLAC__EntropyCodingMethodType = 0;
 pub const FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE2: FLAC__EntropyCodingMethodType = 1;
-pub type FLAC__EntropyCodingMethodType = libc::c_uint;
+pub type FLAC__EntropyCodingMethodType = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__EntropyCodingMethodTypeString: [*const libc::c_char; 0usize];
 }
@@ -268,43 +248,12 @@ pub struct FLAC__EntropyCodingMethod_PartitionedRiceContents {
     pub raw_bits: *mut u32,
     pub capacity_by_order: u32,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__EntropyCodingMethod_PartitionedRiceContents"]
-        [::core::mem::size_of::<FLAC__EntropyCodingMethod_PartitionedRiceContents>() - 24usize];
-    ["Alignment of FLAC__EntropyCodingMethod_PartitionedRiceContents"]
-        [::core::mem::align_of::<FLAC__EntropyCodingMethod_PartitionedRiceContents>() - 8usize];
-    ["Offset of field: FLAC__EntropyCodingMethod_PartitionedRiceContents::parameters"][::core::mem::offset_of!(
-        FLAC__EntropyCodingMethod_PartitionedRiceContents,
-        parameters
-    ) - 0usize];
-    ["Offset of field: FLAC__EntropyCodingMethod_PartitionedRiceContents::raw_bits"][::core::mem::offset_of!(
-        FLAC__EntropyCodingMethod_PartitionedRiceContents,
-        raw_bits
-    ) - 8usize];
-    ["Offset of field: FLAC__EntropyCodingMethod_PartitionedRiceContents::capacity_by_order"][::core::mem::offset_of!(
-        FLAC__EntropyCodingMethod_PartitionedRiceContents,
-        capacity_by_order
-    )
-        - 16usize];
-};
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct FLAC__EntropyCodingMethod_PartitionedRice {
     pub order: u32,
     pub contents: *const FLAC__EntropyCodingMethod_PartitionedRiceContents,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__EntropyCodingMethod_PartitionedRice"]
-        [::core::mem::size_of::<FLAC__EntropyCodingMethod_PartitionedRice>() - 16usize];
-    ["Alignment of FLAC__EntropyCodingMethod_PartitionedRice"]
-        [::core::mem::align_of::<FLAC__EntropyCodingMethod_PartitionedRice>() - 8usize];
-    ["Offset of field: FLAC__EntropyCodingMethod_PartitionedRice::order"]
-        [::core::mem::offset_of!(FLAC__EntropyCodingMethod_PartitionedRice, order) - 0usize];
-    ["Offset of field: FLAC__EntropyCodingMethod_PartitionedRice::contents"]
-        [::core::mem::offset_of!(FLAC__EntropyCodingMethod_PartitionedRice, contents) - 8usize];
-};
 unsafe extern "C" {
     pub static FLAC__ENTROPY_CODING_METHOD_PARTITIONED_RICE_ORDER_LEN: u32;
 }
@@ -334,28 +283,6 @@ pub struct FLAC__EntropyCodingMethod {
 pub union FLAC__EntropyCodingMethod__bindgen_ty_1 {
     pub partitioned_rice: FLAC__EntropyCodingMethod_PartitionedRice,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__EntropyCodingMethod__bindgen_ty_1"]
-        [::core::mem::size_of::<FLAC__EntropyCodingMethod__bindgen_ty_1>() - 16usize];
-    ["Alignment of FLAC__EntropyCodingMethod__bindgen_ty_1"]
-        [::core::mem::align_of::<FLAC__EntropyCodingMethod__bindgen_ty_1>() - 8usize];
-    ["Offset of field: FLAC__EntropyCodingMethod__bindgen_ty_1::partitioned_rice"][::core::mem::offset_of!(
-        FLAC__EntropyCodingMethod__bindgen_ty_1,
-        partitioned_rice
-    ) - 0usize];
-};
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__EntropyCodingMethod"]
-        [::core::mem::size_of::<FLAC__EntropyCodingMethod>() - 24usize];
-    ["Alignment of FLAC__EntropyCodingMethod"]
-        [::core::mem::align_of::<FLAC__EntropyCodingMethod>() - 8usize];
-    ["Offset of field: FLAC__EntropyCodingMethod::type_"]
-        [::core::mem::offset_of!(FLAC__EntropyCodingMethod, type_) - 0usize];
-    ["Offset of field: FLAC__EntropyCodingMethod::data"]
-        [::core::mem::offset_of!(FLAC__EntropyCodingMethod, data) - 8usize];
-};
 unsafe extern "C" {
     pub static FLAC__ENTROPY_CODING_METHOD_TYPE_LEN: u32;
 }
@@ -363,7 +290,7 @@ pub const FLAC__SUBFRAME_TYPE_CONSTANT: FLAC__SubframeType = 0;
 pub const FLAC__SUBFRAME_TYPE_VERBATIM: FLAC__SubframeType = 1;
 pub const FLAC__SUBFRAME_TYPE_FIXED: FLAC__SubframeType = 2;
 pub const FLAC__SUBFRAME_TYPE_LPC: FLAC__SubframeType = 3;
-pub type FLAC__SubframeType = libc::c_uint;
+pub type FLAC__SubframeType = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__SubframeTypeString: [*const libc::c_char; 0usize];
 }
@@ -372,17 +299,9 @@ unsafe extern "C" {
 pub struct FLAC__Subframe_Constant {
     pub value: FLAC__int64,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Subframe_Constant"][::core::mem::size_of::<FLAC__Subframe_Constant>() - 8usize];
-    ["Alignment of FLAC__Subframe_Constant"]
-        [::core::mem::align_of::<FLAC__Subframe_Constant>() - 8usize];
-    ["Offset of field: FLAC__Subframe_Constant::value"]
-        [::core::mem::offset_of!(FLAC__Subframe_Constant, value) - 0usize];
-};
 pub const FLAC__VERBATIM_SUBFRAME_DATA_TYPE_INT32: FLAC__VerbatimSubframeDataType = 0;
 pub const FLAC__VERBATIM_SUBFRAME_DATA_TYPE_INT64: FLAC__VerbatimSubframeDataType = 1;
-pub type FLAC__VerbatimSubframeDataType = libc::c_uint;
+pub type FLAC__VerbatimSubframeDataType = libc::c_int;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct FLAC__Subframe_Verbatim {
@@ -395,28 +314,6 @@ pub union FLAC__Subframe_Verbatim__bindgen_ty_1 {
     pub int32: *const FLAC__int32,
     pub int64: *const FLAC__int64,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Subframe_Verbatim__bindgen_ty_1"]
-        [::core::mem::size_of::<FLAC__Subframe_Verbatim__bindgen_ty_1>() - 8usize];
-    ["Alignment of FLAC__Subframe_Verbatim__bindgen_ty_1"]
-        [::core::mem::align_of::<FLAC__Subframe_Verbatim__bindgen_ty_1>() - 8usize];
-    ["Offset of field: FLAC__Subframe_Verbatim__bindgen_ty_1::int32"]
-        [::core::mem::offset_of!(FLAC__Subframe_Verbatim__bindgen_ty_1, int32) - 0usize];
-    ["Offset of field: FLAC__Subframe_Verbatim__bindgen_ty_1::int64"]
-        [::core::mem::offset_of!(FLAC__Subframe_Verbatim__bindgen_ty_1, int64) - 0usize];
-};
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Subframe_Verbatim"]
-        [::core::mem::size_of::<FLAC__Subframe_Verbatim>() - 16usize];
-    ["Alignment of FLAC__Subframe_Verbatim"]
-        [::core::mem::align_of::<FLAC__Subframe_Verbatim>() - 8usize];
-    ["Offset of field: FLAC__Subframe_Verbatim::data"]
-        [::core::mem::offset_of!(FLAC__Subframe_Verbatim, data) - 0usize];
-    ["Offset of field: FLAC__Subframe_Verbatim::data_type"]
-        [::core::mem::offset_of!(FLAC__Subframe_Verbatim, data_type) - 8usize];
-};
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct FLAC__Subframe_Fixed {
@@ -425,19 +322,6 @@ pub struct FLAC__Subframe_Fixed {
     pub warmup: [FLAC__int64; 4usize],
     pub residual: *const FLAC__int32,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Subframe_Fixed"][::core::mem::size_of::<FLAC__Subframe_Fixed>() - 72usize];
-    ["Alignment of FLAC__Subframe_Fixed"][::core::mem::align_of::<FLAC__Subframe_Fixed>() - 8usize];
-    ["Offset of field: FLAC__Subframe_Fixed::entropy_coding_method"]
-        [::core::mem::offset_of!(FLAC__Subframe_Fixed, entropy_coding_method) - 0usize];
-    ["Offset of field: FLAC__Subframe_Fixed::order"]
-        [::core::mem::offset_of!(FLAC__Subframe_Fixed, order) - 24usize];
-    ["Offset of field: FLAC__Subframe_Fixed::warmup"]
-        [::core::mem::offset_of!(FLAC__Subframe_Fixed, warmup) - 32usize];
-    ["Offset of field: FLAC__Subframe_Fixed::residual"]
-        [::core::mem::offset_of!(FLAC__Subframe_Fixed, residual) - 64usize];
-};
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct FLAC__Subframe_LPC {
@@ -449,25 +333,6 @@ pub struct FLAC__Subframe_LPC {
     pub warmup: [FLAC__int64; 32usize],
     pub residual: *const FLAC__int32,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Subframe_LPC"][::core::mem::size_of::<FLAC__Subframe_LPC>() - 432usize];
-    ["Alignment of FLAC__Subframe_LPC"][::core::mem::align_of::<FLAC__Subframe_LPC>() - 8usize];
-    ["Offset of field: FLAC__Subframe_LPC::entropy_coding_method"]
-        [::core::mem::offset_of!(FLAC__Subframe_LPC, entropy_coding_method) - 0usize];
-    ["Offset of field: FLAC__Subframe_LPC::order"]
-        [::core::mem::offset_of!(FLAC__Subframe_LPC, order) - 24usize];
-    ["Offset of field: FLAC__Subframe_LPC::qlp_coeff_precision"]
-        [::core::mem::offset_of!(FLAC__Subframe_LPC, qlp_coeff_precision) - 28usize];
-    ["Offset of field: FLAC__Subframe_LPC::quantization_level"]
-        [::core::mem::offset_of!(FLAC__Subframe_LPC, quantization_level) - 32usize];
-    ["Offset of field: FLAC__Subframe_LPC::qlp_coeff"]
-        [::core::mem::offset_of!(FLAC__Subframe_LPC, qlp_coeff) - 36usize];
-    ["Offset of field: FLAC__Subframe_LPC::warmup"]
-        [::core::mem::offset_of!(FLAC__Subframe_LPC, warmup) - 168usize];
-    ["Offset of field: FLAC__Subframe_LPC::residual"]
-        [::core::mem::offset_of!(FLAC__Subframe_LPC, residual) - 424usize];
-};
 unsafe extern "C" {
     pub static FLAC__SUBFRAME_LPC_QLP_COEFF_PRECISION_LEN: u32;
 }
@@ -489,32 +354,6 @@ pub union FLAC__Subframe__bindgen_ty_1 {
     pub lpc: FLAC__Subframe_LPC,
     pub verbatim: FLAC__Subframe_Verbatim,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Subframe__bindgen_ty_1"]
-        [::core::mem::size_of::<FLAC__Subframe__bindgen_ty_1>() - 432usize];
-    ["Alignment of FLAC__Subframe__bindgen_ty_1"]
-        [::core::mem::align_of::<FLAC__Subframe__bindgen_ty_1>() - 8usize];
-    ["Offset of field: FLAC__Subframe__bindgen_ty_1::constant"]
-        [::core::mem::offset_of!(FLAC__Subframe__bindgen_ty_1, constant) - 0usize];
-    ["Offset of field: FLAC__Subframe__bindgen_ty_1::fixed"]
-        [::core::mem::offset_of!(FLAC__Subframe__bindgen_ty_1, fixed) - 0usize];
-    ["Offset of field: FLAC__Subframe__bindgen_ty_1::lpc"]
-        [::core::mem::offset_of!(FLAC__Subframe__bindgen_ty_1, lpc) - 0usize];
-    ["Offset of field: FLAC__Subframe__bindgen_ty_1::verbatim"]
-        [::core::mem::offset_of!(FLAC__Subframe__bindgen_ty_1, verbatim) - 0usize];
-};
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Subframe"][::core::mem::size_of::<FLAC__Subframe>() - 448usize];
-    ["Alignment of FLAC__Subframe"][::core::mem::align_of::<FLAC__Subframe>() - 8usize];
-    ["Offset of field: FLAC__Subframe::type_"]
-        [::core::mem::offset_of!(FLAC__Subframe, type_) - 0usize];
-    ["Offset of field: FLAC__Subframe::data"]
-        [::core::mem::offset_of!(FLAC__Subframe, data) - 8usize];
-    ["Offset of field: FLAC__Subframe::wasted_bits"]
-        [::core::mem::offset_of!(FLAC__Subframe, wasted_bits) - 440usize];
-};
 unsafe extern "C" {
     pub static FLAC__SUBFRAME_ZERO_PAD_LEN: u32;
 }
@@ -540,13 +379,13 @@ pub const FLAC__CHANNEL_ASSIGNMENT_INDEPENDENT: FLAC__ChannelAssignment = 0;
 pub const FLAC__CHANNEL_ASSIGNMENT_LEFT_SIDE: FLAC__ChannelAssignment = 1;
 pub const FLAC__CHANNEL_ASSIGNMENT_RIGHT_SIDE: FLAC__ChannelAssignment = 2;
 pub const FLAC__CHANNEL_ASSIGNMENT_MID_SIDE: FLAC__ChannelAssignment = 3;
-pub type FLAC__ChannelAssignment = libc::c_uint;
+pub type FLAC__ChannelAssignment = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__ChannelAssignmentString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__FRAME_NUMBER_TYPE_FRAME_NUMBER: FLAC__FrameNumberType = 0;
 pub const FLAC__FRAME_NUMBER_TYPE_SAMPLE_NUMBER: FLAC__FrameNumberType = 1;
-pub type FLAC__FrameNumberType = libc::c_uint;
+pub type FLAC__FrameNumberType = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__FrameNumberTypeString: [*const libc::c_char; 0usize];
 }
@@ -568,38 +407,6 @@ pub union FLAC__FrameHeader__bindgen_ty_1 {
     pub frame_number: FLAC__uint32,
     pub sample_number: FLAC__uint64,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__FrameHeader__bindgen_ty_1"]
-        [::core::mem::size_of::<FLAC__FrameHeader__bindgen_ty_1>() - 8usize];
-    ["Alignment of FLAC__FrameHeader__bindgen_ty_1"]
-        [::core::mem::align_of::<FLAC__FrameHeader__bindgen_ty_1>() - 8usize];
-    ["Offset of field: FLAC__FrameHeader__bindgen_ty_1::frame_number"]
-        [::core::mem::offset_of!(FLAC__FrameHeader__bindgen_ty_1, frame_number) - 0usize];
-    ["Offset of field: FLAC__FrameHeader__bindgen_ty_1::sample_number"]
-        [::core::mem::offset_of!(FLAC__FrameHeader__bindgen_ty_1, sample_number) - 0usize];
-};
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__FrameHeader"][::core::mem::size_of::<FLAC__FrameHeader>() - 40usize];
-    ["Alignment of FLAC__FrameHeader"][::core::mem::align_of::<FLAC__FrameHeader>() - 8usize];
-    ["Offset of field: FLAC__FrameHeader::blocksize"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, blocksize) - 0usize];
-    ["Offset of field: FLAC__FrameHeader::sample_rate"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, sample_rate) - 4usize];
-    ["Offset of field: FLAC__FrameHeader::channels"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, channels) - 8usize];
-    ["Offset of field: FLAC__FrameHeader::channel_assignment"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, channel_assignment) - 12usize];
-    ["Offset of field: FLAC__FrameHeader::bits_per_sample"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, bits_per_sample) - 16usize];
-    ["Offset of field: FLAC__FrameHeader::number_type"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, number_type) - 20usize];
-    ["Offset of field: FLAC__FrameHeader::number"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, number) - 24usize];
-    ["Offset of field: FLAC__FrameHeader::crc"]
-        [::core::mem::offset_of!(FLAC__FrameHeader, crc) - 32usize];
-};
 unsafe extern "C" {
     pub static FLAC__FRAME_HEADER_SYNC: u32;
 }
@@ -635,13 +442,6 @@ unsafe extern "C" {
 pub struct FLAC__FrameFooter {
     pub crc: FLAC__uint16,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__FrameFooter"][::core::mem::size_of::<FLAC__FrameFooter>() - 2usize];
-    ["Alignment of FLAC__FrameFooter"][::core::mem::align_of::<FLAC__FrameFooter>() - 2usize];
-    ["Offset of field: FLAC__FrameFooter::crc"]
-        [::core::mem::offset_of!(FLAC__FrameFooter, crc) - 0usize];
-};
 unsafe extern "C" {
     pub static FLAC__FRAME_FOOTER_CRC_LEN: u32;
 }
@@ -652,16 +452,6 @@ pub struct FLAC__Frame {
     pub subframes: [FLAC__Subframe; 8usize],
     pub footer: FLAC__FrameFooter,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__Frame"][::core::mem::size_of::<FLAC__Frame>() - 3632usize];
-    ["Alignment of FLAC__Frame"][::core::mem::align_of::<FLAC__Frame>() - 8usize];
-    ["Offset of field: FLAC__Frame::header"][::core::mem::offset_of!(FLAC__Frame, header) - 0usize];
-    ["Offset of field: FLAC__Frame::subframes"]
-        [::core::mem::offset_of!(FLAC__Frame, subframes) - 40usize];
-    ["Offset of field: FLAC__Frame::footer"]
-        [::core::mem::offset_of!(FLAC__Frame, footer) - 3624usize];
-};
 pub const FLAC__METADATA_TYPE_STREAMINFO: FLAC__MetadataType = 0;
 pub const FLAC__METADATA_TYPE_PADDING: FLAC__MetadataType = 1;
 pub const FLAC__METADATA_TYPE_APPLICATION: FLAC__MetadataType = 2;
@@ -671,7 +461,7 @@ pub const FLAC__METADATA_TYPE_CUESHEET: FLAC__MetadataType = 5;
 pub const FLAC__METADATA_TYPE_PICTURE: FLAC__MetadataType = 6;
 pub const FLAC__METADATA_TYPE_UNDEFINED: FLAC__MetadataType = 7;
 pub const FLAC__MAX_METADATA_TYPE: FLAC__MetadataType = 126;
-pub type FLAC__MetadataType = libc::c_uint;
+pub type FLAC__MetadataType = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__MetadataTypeString: [*const libc::c_char; 0usize];
 }
@@ -688,31 +478,6 @@ pub struct FLAC__StreamMetadata_StreamInfo {
     pub total_samples: FLAC__uint64,
     pub md5sum: [FLAC__byte; 16usize],
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_StreamInfo"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_StreamInfo>() - 56usize];
-    ["Alignment of FLAC__StreamMetadata_StreamInfo"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_StreamInfo>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::min_blocksize"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, min_blocksize) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::max_blocksize"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, max_blocksize) - 4usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::min_framesize"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, min_framesize) - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::max_framesize"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, max_framesize) - 12usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::sample_rate"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, sample_rate) - 16usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::channels"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, channels) - 20usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::bits_per_sample"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, bits_per_sample) - 24usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::total_samples"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, total_samples) - 32usize];
-    ["Offset of field: FLAC__StreamMetadata_StreamInfo::md5sum"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_StreamInfo, md5sum) - 40usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_STREAMINFO_MIN_BLOCK_SIZE_LEN: u32;
 }
@@ -745,32 +510,12 @@ unsafe extern "C" {
 pub struct FLAC__StreamMetadata_Padding {
     pub dummy: libc::c_int,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_Padding"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_Padding>() - 4usize];
-    ["Alignment of FLAC__StreamMetadata_Padding"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_Padding>() - 4usize];
-    ["Offset of field: FLAC__StreamMetadata_Padding::dummy"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Padding, dummy) - 0usize];
-};
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct FLAC__StreamMetadata_Application {
     pub id: [FLAC__byte; 4usize],
     pub data: *mut FLAC__byte,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_Application"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_Application>() - 16usize];
-    ["Alignment of FLAC__StreamMetadata_Application"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_Application>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_Application::id"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Application, id) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_Application::data"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Application, data) - 8usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_APPLICATION_ID_LEN: u32;
 }
@@ -781,19 +526,6 @@ pub struct FLAC__StreamMetadata_SeekPoint {
     pub stream_offset: FLAC__uint64,
     pub frame_samples: u32,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_SeekPoint"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_SeekPoint>() - 24usize];
-    ["Alignment of FLAC__StreamMetadata_SeekPoint"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_SeekPoint>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_SeekPoint::sample_number"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_SeekPoint, sample_number) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_SeekPoint::stream_offset"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_SeekPoint, stream_offset) - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_SeekPoint::frame_samples"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_SeekPoint, frame_samples) - 16usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_SEEKPOINT_SAMPLE_NUMBER_LEN: u32;
 }
@@ -812,34 +544,12 @@ pub struct FLAC__StreamMetadata_SeekTable {
     pub num_points: u32,
     pub points: *mut FLAC__StreamMetadata_SeekPoint,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_SeekTable"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_SeekTable>() - 16usize];
-    ["Alignment of FLAC__StreamMetadata_SeekTable"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_SeekTable>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_SeekTable::num_points"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_SeekTable, num_points) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_SeekTable::points"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_SeekTable, points) - 8usize];
-};
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct FLAC__StreamMetadata_VorbisComment_Entry {
     pub length: FLAC__uint32,
     pub entry: *mut FLAC__byte,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_VorbisComment_Entry"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_VorbisComment_Entry>() - 16usize];
-    ["Alignment of FLAC__StreamMetadata_VorbisComment_Entry"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_VorbisComment_Entry>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_VorbisComment_Entry::length"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_VorbisComment_Entry, length) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_VorbisComment_Entry::entry"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_VorbisComment_Entry, entry) - 8usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_VORBIS_COMMENT_ENTRY_LENGTH_LEN: u32;
 }
@@ -850,19 +560,6 @@ pub struct FLAC__StreamMetadata_VorbisComment {
     pub num_comments: FLAC__uint32,
     pub comments: *mut FLAC__StreamMetadata_VorbisComment_Entry,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_VorbisComment"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_VorbisComment>() - 32usize];
-    ["Alignment of FLAC__StreamMetadata_VorbisComment"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_VorbisComment>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_VorbisComment::vendor_string"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_VorbisComment, vendor_string) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_VorbisComment::num_comments"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_VorbisComment, num_comments) - 16usize];
-    ["Offset of field: FLAC__StreamMetadata_VorbisComment::comments"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_VorbisComment, comments) - 24usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_VORBIS_COMMENT_NUM_COMMENTS_LEN: u32;
 }
@@ -872,17 +569,6 @@ pub struct FLAC__StreamMetadata_CueSheet_Index {
     pub offset: FLAC__uint64,
     pub number: FLAC__byte,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_CueSheet_Index"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_CueSheet_Index>() - 16usize];
-    ["Alignment of FLAC__StreamMetadata_CueSheet_Index"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_CueSheet_Index>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet_Index::offset"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet_Index, offset) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet_Index::number"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet_Index, number) - 8usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_CUESHEET_INDEX_OFFSET_LEN: u32;
 }
@@ -900,26 +586,10 @@ pub struct FLAC__StreamMetadata_CueSheet_Track {
     pub isrc: [libc::c_char; 13usize],
     pub _bitfield_align_1: [u8; 0],
     pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize]>,
+    pub __bindgen_padding_0: [u8; 5usize],
     pub num_indices: FLAC__byte,
     pub indices: *mut FLAC__StreamMetadata_CueSheet_Index,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_CueSheet_Track"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_CueSheet_Track>() - 32usize];
-    ["Alignment of FLAC__StreamMetadata_CueSheet_Track"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_CueSheet_Track>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet_Track::offset"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet_Track, offset) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet_Track::number"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet_Track, number) - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet_Track::isrc"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet_Track, isrc) - 9usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet_Track::num_indices"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet_Track, num_indices) - 23usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet_Track::indices"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet_Track, indices) - 24usize];
-};
 impl FLAC__StreamMetadata_CueSheet_Track {
     #[inline]
     pub fn type_(&self) -> u32 {
@@ -1031,23 +701,6 @@ pub struct FLAC__StreamMetadata_CueSheet {
     pub num_tracks: u32,
     pub tracks: *mut FLAC__StreamMetadata_CueSheet_Track,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_CueSheet"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_CueSheet>() - 160usize];
-    ["Alignment of FLAC__StreamMetadata_CueSheet"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_CueSheet>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet::media_catalog_number"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet, media_catalog_number) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet::lead_in"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet, lead_in) - 136usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet::is_cd"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet, is_cd) - 144usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet::num_tracks"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet, num_tracks) - 148usize];
-    ["Offset of field: FLAC__StreamMetadata_CueSheet::tracks"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_CueSheet, tracks) - 152usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_CUESHEET_MEDIA_CATALOG_NUMBER_LEN: u32;
 }
@@ -1091,7 +744,7 @@ pub const FLAC__STREAM_METADATA_PICTURE_TYPE_BAND_LOGOTYPE: FLAC__StreamMetadata
 pub const FLAC__STREAM_METADATA_PICTURE_TYPE_PUBLISHER_LOGOTYPE: FLAC__StreamMetadata_Picture_Type =
     20;
 pub const FLAC__STREAM_METADATA_PICTURE_TYPE_UNDEFINED: FLAC__StreamMetadata_Picture_Type = 21;
-pub type FLAC__StreamMetadata_Picture_Type = libc::c_uint;
+pub type FLAC__StreamMetadata_Picture_Type = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamMetadata_Picture_TypeString: [*const libc::c_char; 0usize];
 }
@@ -1108,31 +761,6 @@ pub struct FLAC__StreamMetadata_Picture {
     pub data_length: FLAC__uint32,
     pub data: *mut FLAC__byte,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_Picture"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_Picture>() - 56usize];
-    ["Alignment of FLAC__StreamMetadata_Picture"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_Picture>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::type_"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, type_) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::mime_type"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, mime_type) - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::description"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, description) - 16usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::width"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, width) - 24usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::height"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, height) - 28usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::depth"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, depth) - 32usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::colors"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, colors) - 36usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::data_length"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, data_length) - 40usize];
-    ["Offset of field: FLAC__StreamMetadata_Picture::data"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Picture, data) - 48usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_PICTURE_TYPE_LEN: u32;
 }
@@ -1162,15 +790,6 @@ unsafe extern "C" {
 pub struct FLAC__StreamMetadata_Unknown {
     pub data: *mut FLAC__byte,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata_Unknown"]
-        [::core::mem::size_of::<FLAC__StreamMetadata_Unknown>() - 8usize];
-    ["Alignment of FLAC__StreamMetadata_Unknown"]
-        [::core::mem::align_of::<FLAC__StreamMetadata_Unknown>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata_Unknown::data"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata_Unknown, data) - 0usize];
-};
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct FLAC__StreamMetadata {
@@ -1191,42 +810,6 @@ pub union FLAC__StreamMetadata__bindgen_ty_1 {
     pub picture: FLAC__StreamMetadata_Picture,
     pub unknown: FLAC__StreamMetadata_Unknown,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata__bindgen_ty_1"]
-        [::core::mem::size_of::<FLAC__StreamMetadata__bindgen_ty_1>() - 160usize];
-    ["Alignment of FLAC__StreamMetadata__bindgen_ty_1"]
-        [::core::mem::align_of::<FLAC__StreamMetadata__bindgen_ty_1>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::stream_info"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, stream_info) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::padding"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, padding) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::application"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, application) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::seek_table"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, seek_table) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::vorbis_comment"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, vorbis_comment) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::cue_sheet"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, cue_sheet) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::picture"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, picture) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata__bindgen_ty_1::unknown"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata__bindgen_ty_1, unknown) - 0usize];
-};
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamMetadata"][::core::mem::size_of::<FLAC__StreamMetadata>() - 176usize];
-    ["Alignment of FLAC__StreamMetadata"][::core::mem::align_of::<FLAC__StreamMetadata>() - 8usize];
-    ["Offset of field: FLAC__StreamMetadata::type_"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata, type_) - 0usize];
-    ["Offset of field: FLAC__StreamMetadata::is_last"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata, is_last) - 4usize];
-    ["Offset of field: FLAC__StreamMetadata::length"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata, length) - 8usize];
-    ["Offset of field: FLAC__StreamMetadata::data"]
-        [::core::mem::offset_of!(FLAC__StreamMetadata, data) - 16usize];
-};
 unsafe extern "C" {
     pub static FLAC__STREAM_METADATA_IS_LAST_LEN: u32;
 }
@@ -1281,6 +864,8 @@ unsafe extern "C" {
         violation: *mut *const libc::c_char,
     ) -> FLAC__bool;
 }
+pub type _off_t = libc::c_long;
+pub type off_t = _off_t;
 unsafe extern "C" {
     pub fn FLAC__metadata_get_streaminfo(
         filename: *const libc::c_char,
@@ -1340,7 +925,7 @@ pub const FLAC__METADATA_SIMPLE_ITERATOR_STATUS_MEMORY_ALLOCATION_ERROR:
     FLAC__Metadata_SimpleIteratorStatus = 11;
 pub const FLAC__METADATA_SIMPLE_ITERATOR_STATUS_INTERNAL_ERROR:
     FLAC__Metadata_SimpleIteratorStatus = 12;
-pub type FLAC__Metadata_SimpleIteratorStatus = libc::c_uint;
+pub type FLAC__Metadata_SimpleIteratorStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__Metadata_SimpleIteratorStatusString: [*const libc::c_char; 0usize];
 }
@@ -1455,7 +1040,7 @@ pub const FLAC__METADATA_CHAIN_STATUS_INTERNAL_ERROR: FLAC__Metadata_ChainStatus
 pub const FLAC__METADATA_CHAIN_STATUS_INVALID_CALLBACKS: FLAC__Metadata_ChainStatus = 13;
 pub const FLAC__METADATA_CHAIN_STATUS_READ_WRITE_MISMATCH: FLAC__Metadata_ChainStatus = 14;
 pub const FLAC__METADATA_CHAIN_STATUS_WRONG_WRITE_CALL: FLAC__Metadata_ChainStatus = 15;
-pub type FLAC__Metadata_ChainStatus = libc::c_uint;
+pub type FLAC__Metadata_ChainStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__Metadata_ChainStatusString: [*const libc::c_char; 0usize];
 }
@@ -1902,6 +1487,11 @@ unsafe extern "C" {
         length: FLAC__uint32,
     ) -> *mut FLAC__StreamMetadata;
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _iobuf {
+    pub _Placeholder: *mut libc::c_void,
+}
 pub const FLAC__STREAM_DECODER_SEARCH_FOR_METADATA: FLAC__StreamDecoderState = 0;
 pub const FLAC__STREAM_DECODER_READ_METADATA: FLAC__StreamDecoderState = 1;
 pub const FLAC__STREAM_DECODER_SEARCH_FOR_FRAME_SYNC: FLAC__StreamDecoderState = 2;
@@ -1913,7 +1503,7 @@ pub const FLAC__STREAM_DECODER_ABORTED: FLAC__StreamDecoderState = 7;
 pub const FLAC__STREAM_DECODER_MEMORY_ALLOCATION_ERROR: FLAC__StreamDecoderState = 8;
 pub const FLAC__STREAM_DECODER_UNINITIALIZED: FLAC__StreamDecoderState = 9;
 pub const FLAC__STREAM_DECODER_END_OF_LINK: FLAC__StreamDecoderState = 10;
-pub type FLAC__StreamDecoderState = libc::c_uint;
+pub type FLAC__StreamDecoderState = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderStateString: [*const libc::c_char; 0usize];
 }
@@ -1924,7 +1514,7 @@ pub const FLAC__STREAM_DECODER_INIT_STATUS_MEMORY_ALLOCATION_ERROR: FLAC__Stream
     3;
 pub const FLAC__STREAM_DECODER_INIT_STATUS_ERROR_OPENING_FILE: FLAC__StreamDecoderInitStatus = 4;
 pub const FLAC__STREAM_DECODER_INIT_STATUS_ALREADY_INITIALIZED: FLAC__StreamDecoderInitStatus = 5;
-pub type FLAC__StreamDecoderInitStatus = libc::c_uint;
+pub type FLAC__StreamDecoderInitStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderInitStatusString: [*const libc::c_char; 0usize];
 }
@@ -1932,34 +1522,34 @@ pub const FLAC__STREAM_DECODER_READ_STATUS_CONTINUE: FLAC__StreamDecoderReadStat
 pub const FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM: FLAC__StreamDecoderReadStatus = 1;
 pub const FLAC__STREAM_DECODER_READ_STATUS_ABORT: FLAC__StreamDecoderReadStatus = 2;
 pub const FLAC__STREAM_DECODER_READ_STATUS_END_OF_LINK: FLAC__StreamDecoderReadStatus = 3;
-pub type FLAC__StreamDecoderReadStatus = libc::c_uint;
+pub type FLAC__StreamDecoderReadStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderReadStatusString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__STREAM_DECODER_SEEK_STATUS_OK: FLAC__StreamDecoderSeekStatus = 0;
 pub const FLAC__STREAM_DECODER_SEEK_STATUS_ERROR: FLAC__StreamDecoderSeekStatus = 1;
 pub const FLAC__STREAM_DECODER_SEEK_STATUS_UNSUPPORTED: FLAC__StreamDecoderSeekStatus = 2;
-pub type FLAC__StreamDecoderSeekStatus = libc::c_uint;
+pub type FLAC__StreamDecoderSeekStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderSeekStatusString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__STREAM_DECODER_TELL_STATUS_OK: FLAC__StreamDecoderTellStatus = 0;
 pub const FLAC__STREAM_DECODER_TELL_STATUS_ERROR: FLAC__StreamDecoderTellStatus = 1;
 pub const FLAC__STREAM_DECODER_TELL_STATUS_UNSUPPORTED: FLAC__StreamDecoderTellStatus = 2;
-pub type FLAC__StreamDecoderTellStatus = libc::c_uint;
+pub type FLAC__StreamDecoderTellStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderTellStatusString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__STREAM_DECODER_LENGTH_STATUS_OK: FLAC__StreamDecoderLengthStatus = 0;
 pub const FLAC__STREAM_DECODER_LENGTH_STATUS_ERROR: FLAC__StreamDecoderLengthStatus = 1;
 pub const FLAC__STREAM_DECODER_LENGTH_STATUS_UNSUPPORTED: FLAC__StreamDecoderLengthStatus = 2;
-pub type FLAC__StreamDecoderLengthStatus = libc::c_uint;
+pub type FLAC__StreamDecoderLengthStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderLengthStatusString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE: FLAC__StreamDecoderWriteStatus = 0;
 pub const FLAC__STREAM_DECODER_WRITE_STATUS_ABORT: FLAC__StreamDecoderWriteStatus = 1;
-pub type FLAC__StreamDecoderWriteStatus = libc::c_uint;
+pub type FLAC__StreamDecoderWriteStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderWriteStatusString: [*const libc::c_char; 0usize];
 }
@@ -1970,7 +1560,7 @@ pub const FLAC__STREAM_DECODER_ERROR_STATUS_UNPARSEABLE_STREAM: FLAC__StreamDeco
 pub const FLAC__STREAM_DECODER_ERROR_STATUS_BAD_METADATA: FLAC__StreamDecoderErrorStatus = 4;
 pub const FLAC__STREAM_DECODER_ERROR_STATUS_OUT_OF_BOUNDS: FLAC__StreamDecoderErrorStatus = 5;
 pub const FLAC__STREAM_DECODER_ERROR_STATUS_MISSING_FRAME: FLAC__StreamDecoderErrorStatus = 6;
-pub type FLAC__StreamDecoderErrorStatus = libc::c_uint;
+pub type FLAC__StreamDecoderErrorStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamDecoderErrorStatusString: [*const libc::c_char; 0usize];
 }
@@ -1990,15 +1580,6 @@ pub struct FLAC__StreamDecoder {
     pub protected_: *mut FLAC__StreamDecoderProtected,
     pub private_: *mut FLAC__StreamDecoderPrivate,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamDecoder"][::core::mem::size_of::<FLAC__StreamDecoder>() - 16usize];
-    ["Alignment of FLAC__StreamDecoder"][::core::mem::align_of::<FLAC__StreamDecoder>() - 8usize];
-    ["Offset of field: FLAC__StreamDecoder::protected_"]
-        [::core::mem::offset_of!(FLAC__StreamDecoder, protected_) - 0usize];
-    ["Offset of field: FLAC__StreamDecoder::private_"]
-        [::core::mem::offset_of!(FLAC__StreamDecoder, private_) - 8usize];
-};
 pub type FLAC__StreamDecoderReadCallback = ::core::option::Option<
     unsafe extern "C" fn(
         decoder: *const FLAC__StreamDecoder,
@@ -2296,7 +1877,7 @@ pub const FLAC__STREAM_ENCODER_CLIENT_ERROR: FLAC__StreamEncoderState = 5;
 pub const FLAC__STREAM_ENCODER_IO_ERROR: FLAC__StreamEncoderState = 6;
 pub const FLAC__STREAM_ENCODER_FRAMING_ERROR: FLAC__StreamEncoderState = 7;
 pub const FLAC__STREAM_ENCODER_MEMORY_ALLOCATION_ERROR: FLAC__StreamEncoderState = 8;
-pub type FLAC__StreamEncoderState = libc::c_uint;
+pub type FLAC__StreamEncoderState = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamEncoderStateString: [*const libc::c_char; 0usize];
 }
@@ -2318,7 +1899,7 @@ pub const FLAC__STREAM_ENCODER_INIT_STATUS_BLOCK_SIZE_TOO_SMALL_FOR_LPC_ORDER:
 pub const FLAC__STREAM_ENCODER_INIT_STATUS_NOT_STREAMABLE: FLAC__StreamEncoderInitStatus = 11;
 pub const FLAC__STREAM_ENCODER_INIT_STATUS_INVALID_METADATA: FLAC__StreamEncoderInitStatus = 12;
 pub const FLAC__STREAM_ENCODER_INIT_STATUS_ALREADY_INITIALIZED: FLAC__StreamEncoderInitStatus = 13;
-pub type FLAC__StreamEncoderInitStatus = libc::c_uint;
+pub type FLAC__StreamEncoderInitStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamEncoderInitStatusString: [*const libc::c_char; 0usize];
 }
@@ -2326,27 +1907,27 @@ pub const FLAC__STREAM_ENCODER_READ_STATUS_CONTINUE: FLAC__StreamEncoderReadStat
 pub const FLAC__STREAM_ENCODER_READ_STATUS_END_OF_STREAM: FLAC__StreamEncoderReadStatus = 1;
 pub const FLAC__STREAM_ENCODER_READ_STATUS_ABORT: FLAC__StreamEncoderReadStatus = 2;
 pub const FLAC__STREAM_ENCODER_READ_STATUS_UNSUPPORTED: FLAC__StreamEncoderReadStatus = 3;
-pub type FLAC__StreamEncoderReadStatus = libc::c_uint;
+pub type FLAC__StreamEncoderReadStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamEncoderReadStatusString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__STREAM_ENCODER_WRITE_STATUS_OK: FLAC__StreamEncoderWriteStatus = 0;
 pub const FLAC__STREAM_ENCODER_WRITE_STATUS_FATAL_ERROR: FLAC__StreamEncoderWriteStatus = 1;
-pub type FLAC__StreamEncoderWriteStatus = libc::c_uint;
+pub type FLAC__StreamEncoderWriteStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamEncoderWriteStatusString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__STREAM_ENCODER_SEEK_STATUS_OK: FLAC__StreamEncoderSeekStatus = 0;
 pub const FLAC__STREAM_ENCODER_SEEK_STATUS_ERROR: FLAC__StreamEncoderSeekStatus = 1;
 pub const FLAC__STREAM_ENCODER_SEEK_STATUS_UNSUPPORTED: FLAC__StreamEncoderSeekStatus = 2;
-pub type FLAC__StreamEncoderSeekStatus = libc::c_uint;
+pub type FLAC__StreamEncoderSeekStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamEncoderSeekStatusString: [*const libc::c_char; 0usize];
 }
 pub const FLAC__STREAM_ENCODER_TELL_STATUS_OK: FLAC__StreamEncoderTellStatus = 0;
 pub const FLAC__STREAM_ENCODER_TELL_STATUS_ERROR: FLAC__StreamEncoderTellStatus = 1;
 pub const FLAC__STREAM_ENCODER_TELL_STATUS_UNSUPPORTED: FLAC__StreamEncoderTellStatus = 2;
-pub type FLAC__StreamEncoderTellStatus = libc::c_uint;
+pub type FLAC__StreamEncoderTellStatus = libc::c_int;
 unsafe extern "C" {
     pub static FLAC__StreamEncoderTellStatusString: [*const libc::c_char; 0usize];
 }
@@ -2366,15 +1947,6 @@ pub struct FLAC__StreamEncoder {
     pub protected_: *mut FLAC__StreamEncoderProtected,
     pub private_: *mut FLAC__StreamEncoderPrivate,
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of FLAC__StreamEncoder"][::core::mem::size_of::<FLAC__StreamEncoder>() - 16usize];
-    ["Alignment of FLAC__StreamEncoder"][::core::mem::align_of::<FLAC__StreamEncoder>() - 8usize];
-    ["Offset of field: FLAC__StreamEncoder::protected_"]
-        [::core::mem::offset_of!(FLAC__StreamEncoder, protected_) - 0usize];
-    ["Offset of field: FLAC__StreamEncoder::private_"]
-        [::core::mem::offset_of!(FLAC__StreamEncoder, private_) - 8usize];
-};
 pub type FLAC__StreamEncoderReadCallback = ::core::option::Option<
     unsafe extern "C" fn(
         encoder: *const FLAC__StreamEncoder,
