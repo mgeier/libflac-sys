@@ -22,8 +22,6 @@ fn main() {
             .define("INSTALL_DOCS", "OFF")
             .define("INSTALL_PKG_CONFIG_MODULE", "OFF")
             .define("INSTALL_CMAKE_PACKAGE_MODULE", "OFF")
-            // This is needed with CMake 4.x (until a new OGG release):
-            .define("CMAKE_POLICY_VERSION_MINIMUM", "3.5")
             .build();
         println!("cargo:rustc-link-search=native={}/lib", ogg_path.display());
         // This path is used on 64 bit Fedora 33:
