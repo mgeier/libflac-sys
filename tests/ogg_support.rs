@@ -4,6 +4,6 @@ fn ogg_support() {
     if cfg!(feature = "build-flac") {
         assert_eq!(supports_ogg, cfg!(feature = "build-ogg"));
     } else {
-        println!("external libFLAC supports OGG: {}", supports_ogg);
+        println!("external libFLAC supports OGG: {supports_ogg}");
     }
 }
