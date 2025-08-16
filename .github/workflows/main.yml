@@ -22,7 +22,7 @@ jobs:
     env: ${{ matrix.env || fromJSON('{}') }}
     steps:
       - name: Clone Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Install Rust
@@ -43,7 +43,7 @@ jobs:
         run: |
           sudo apt-get install --yes --no-install-recommends libflac-dev
       - name: Clone Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Install Rust
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Install Rust
@@ -101,7 +101,7 @@ jobs:
             cmake:p
             rust:p
       - name: Clone Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Run tests
@@ -126,7 +126,7 @@ jobs:
             flac:p
             rust:p
       - name: Clone Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Run tests against external libraries
