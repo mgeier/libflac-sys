@@ -9,6 +9,7 @@ readme = "README.md"
 license = "BSD-3-Clause"
 repository = "https://github.com/mgeier/libflac-sys"
 edition = "2018"
+rust-version = "1.65"
 
 links = "FLAC"
 

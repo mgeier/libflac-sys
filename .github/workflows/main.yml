@@ -84,6 +84,24 @@ jobs:
         run: |
           cargo package --verbose
 
+  MSRV:
+    strategy:
+      matrix:
+        rust-version: ["1.65"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Git repository
+        uses: actions/checkout@v5
+        with:
+          submodules: true
+      - name: Install Rust version ${{ matrix.rust-version }}
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust-version }}
+      - name: Check whether it compiles
+        run: |
+          cargo check --all-features --verbose
+
   MSYS2:
     runs-on: windows-latest
     defaults:
