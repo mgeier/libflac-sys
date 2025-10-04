@@ -12,14 +12,10 @@ jobs:
         - os: macos-latest
         - os: windows-latest
           toolchain-suffix: -gnu
-          env:
-            # https://github.com/rust-lang/rust/issues/68973
-            RUSTFLAGS: "-Clink-arg=-lssp_nonshared -Clink-arg=-lssp"
         - os: windows-latest
           toolchain-suffix: -msvc
         - os: ubuntu-latest
     runs-on: ${{ matrix.os }}
-    env: ${{ matrix.env || fromJSON('{}') }}
     steps:
       - name: Clone Git repository
         uses: actions/checkout@v5
